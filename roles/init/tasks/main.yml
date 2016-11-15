@@ -1,0 +1,20 @@
+- name: install aptitude
+  apt: pkg=aptitude update_cache=true
+- name: Update system
+  apt: upgrade=yes update_cache=true cache_valid_time=3600
+- name: Install emacs editor
+  apt: pkg=emacs state=installed update_cache=true
+- name: Create ~/.ssh directory
+  file:
+    path=/home/{{ ansible_user }}/.ssh
+    state=directory
+    owner="{{ ansible_user }}"
+    group="{{ ansible_user }}"
+    mode=0700
+- name: Copy public key
+  copy:
+    src=authorized_keys
+    dest=/home/{{ ansible_user }}/.ssh/authorized_keys
+    owner="{{ ansible_user }}"
+    group="{{ ansible_user }}"
+    mode=600
