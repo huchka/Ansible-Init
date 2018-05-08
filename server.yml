@@ -3,7 +3,7 @@
   become: true
   pre_tasks:
     - name: 'Install python'
-      raw: apt-get install python-simplejson -y
+      raw: apt-get install python-minimal -y
   roles:
     - init
     
